@@ -21,11 +21,7 @@ export default function UserPage({ users }) {
                 <td>{user.email}</td>
                 <td>{user.name}</td>
                 <td>{new Date(user.signupDate).toLocaleDateString()}</td>
-                <td>
-                  <Link className='btn btn-ghost btn-xs' href={`/garden/${user.gardenId}`}>
-                    Garden Details
-                  </Link>
-                </td>
+                
               </tr>
             ))}
           </tbody>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image'; // Import Image component
 
 export default function TopPlants({ title, icon, months, defaultMonth, plantLists }) {
   const [selectedMonth, setSelectedMonth] = useState(defaultMonth);
@@ -7,10 +8,10 @@ export default function TopPlants({ title, icon, months, defaultMonth, plantList
     setSelectedMonth(e.target.value);
   };
 
-  const topPlantsList = plantLists[selectedMonth] || []; // Filter by selected month
+  const topPlantsList = plantLists[selectedMonth] || { images: [], plants: [] };
 
   return (
-    <div className='card max-w-[30rem] max-h-[20rem] min-w-[30rem] min-h-[20rem] bg-base-200 shadow-xl'>
+    <div className='card max-w-[50rem] max-h-[43rem] min-w-[50rem] min-h-[43rem] bg-base-200 shadow-xl'>
       <div className='card-body'>
         <h2 className='card-title flex justify-center text-emerald-600 uppercase'>
           {icon} {title}
@@ -44,11 +45,39 @@ export default function TopPlants({ title, icon, months, defaultMonth, plantList
               </svg>
             </div>
           </div>
-          <ul className='space-y-3 mt-3'>
-            {topPlantsList.map((plant, index) => (
-              <li key={index}>{plant}</li>
-            ))}
-          </ul>
+          {topPlantsList.images.length > 0 ? (
+            <ul className='space-y-5 mt-10'>
+              {topPlantsList.images.map((image, index) => (
+                <div
+                  key={index}
+                  className='bg-white p-3 rounded shadow-md'
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                  }}
+                >
+                  <div style={{ marginRight: '16px', marginLeft: '16px' }}>
+                    <Image src={image} width={80} height={80} />
+                  </div>
+                  <p
+                    style={{
+                      flex: '1',
+                      fontSize: '20px',
+                      fontWeight: 'bold',
+                      color: 'black',
+                    }}
+                  >
+                    {topPlantsList.plants[index]}
+                  </p>
+                </div>
+              ))}
+            </ul>
+          ) : (
+            
+            <p style={{ fontSize: '25px', fontWeight: 'bold', fontStyle: 'italic', color: 'black', marginTop: '250px'}}>
+              No plants available</p>
+          )}
         </div>
       </div>
     </div>

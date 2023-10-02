@@ -11,20 +11,14 @@ export default function GardenCard({ plant }) {
   }
 
   return (
-    <div className='card w-80 min-h-[30rem] max-h-[30rem] bg-base-200 shadow-xl'>
-      <figure className='px-10 pt-10'>
+    <div className='card w-80 min-h-[25rem] max-h-[25rem] bg-base-200 shadow-xl'>
+      <figure className='px-15 pt-10'>
         <img src={plant.image} alt={plant.name} className='rounded-xl' />
       </figure>
       <div className='card-body items-center text-center'>
         <h2 className='card-title'>{plant.nickname === '' ? plant.name : plant.nickname}</h2>
         <p>Date Added: {new Date(plant.dateAdded).toLocaleDateString()}</p>
         <div className='card-actions'>
-          <button
-            className='btn btn-error'
-            onClick={() => deletePlant(plant.id).then(() => window.location.reload())}
-          >
-            Remove Plant
-          </button>
         </div>
       </div>
     </div>

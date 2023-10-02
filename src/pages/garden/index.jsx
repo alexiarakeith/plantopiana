@@ -4,7 +4,7 @@ import React from 'react'
 export default function UserPage({ users }) {
   return (
     <div>
-      <h1 className='text-4xl font-fig'>Gardens in Plantopia</h1>
+      <h1 className='text-4xl font-fig'>User Plants</h1>
       <div className='w-[100%] flex justify-center items-center my-5'>
         <table className='table table-zebra'>
           <thead>
@@ -23,7 +23,7 @@ export default function UserPage({ users }) {
                 <td>{new Date(user.signupDate).toLocaleDateString()}</td>
                 <td>
                   <Link className='btn btn-ghost btn-xs' href={`/garden/${user.gardenId}`}>
-                    Garden Plants
+                    User Plants
                   </Link>
                 </td>
               </tr>

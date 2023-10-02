@@ -1,64 +1,116 @@
-import InfoCard from '@/components/InfoCard'
-import { RiPlantLine } from 'react-icons/ri'
-import { BiUserCircle } from 'react-icons/bi'
-import { TbPlant2 } from 'react-icons/tb'
-import TopPlants from '@/components/TopPlants'
+import InfoCard from '@/components/InfoCard';
+import { RiPlantLine } from 'react-icons/ri';
+import { BiUserCircle } from 'react-icons/bi';
+import { TbPlant2 } from 'react-icons/tb';
+import TopPlants from '@/components/TopPlants';
+
+// Import the images using relative paths
+import image1 from '../../public/image1.jpg';
+import image2 from '../../public/image2.jpg';
+import image3 from '../../public/image3.jpg';
+import image4 from '../../public/image4.jpg';
+
+
+
 
 export default function Home({ userCount, plantCount, gardenCount }) {
 
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const defaultMonth = 'September'; // Set your default month
+  const defaultMonth = 'September';
   const plantLists = {
-    January: ['No Plants'],
-    February: ['No Plants'],
-    March: ['No Plants'],
-    April: ['No Plants'],
-    May: ['1. European Silver Fir', '2. Eskimo Sunset Sycamore Maple', '3. No Plants', '4. No Plants', '5. No Plants'],
-    June: ['1. European Silver Fir', '2. Aloe Vera', '3. Candid Apple Flowering Crab', '4. Eskimo Sunset Sycamore Maple', '5. No Plants'],
-    July: ['No Plants'],
-    August: ['No Plants'],
-    September: ['No Plants'],
-    October: ['No Plants'],
-    November: ['No Plants'],
-    December: ['No Plants'],
+    January: {
+      images: [],
+      plants: [],
+    },
+    February: {
+      images: [],
+      plants: [],
+    },
+    March: {
+      images: [],
+      plants: [],
+    },
+    April: {
+      images: [],
+      plants: [],
+    },
+    May: {
+      images: [image1, image2],
+      plants: ['European Silver Fir', 'Eskimo Sunset Sycamore Maple'],
+    },
+    June: {
+      images: [image1, image3,image4,image2],
+      plants: ['European Silver Fir', 'Aloe Vera', 'Candid Apple Flowering Crab', 'Eskimo Sunset Sycamore Maple'],
+    },
+    July: {
+      images: [],
+      plants: [],
+    },
+    August: {
+      images: [],
+      plants: [],
+    },
+    September: {
+      images: [],
+      plants: [],
+    },
+    October: {
+      images: [],
+      plants: [],
+    },
+    November: {
+      images: [],
+      plants: [],
+    },
+    December: {
+      images: [],
+      plants: [],
+    },
+    
     
   };
 
-
+  
   return (
     <div>
       <h1 className='text-4xl font-fig'>Welcome to Plantopia Admin Panel</h1>
 
-      <div className='flex justify-left items-center gap-5 py-8 ml-10'>
-        <InfoCard
-          icon={<BiUserCircle className='mr-2' />}
-          route={'/user'}
-          title={'Total Users'}
-          value={('000' + userCount).slice(-4)}
-        />
-      </div>
+      <div className='flex justify-between items-start gap-12 py-8 ml-12'>
+        {/* Left Side */}
+        <div className='flex flex-col justify-center items-center gap-12'>
+          {/* InfoCard 1 */}
+          <InfoCard
+            icon={<BiUserCircle className='mr-2' />}
+            route={'/user'}
+            title={'Total Users'}
+            value={('000' + userCount).slice(-4)}
+          />
 
-      <div className='flex justify-left items-center gap-5 py-8 ml-10'>
-        <InfoCard
-          icon={<TbPlant2 className='mr-2' />}
-          route={'/garden'}
-          title={'User Gardens'}
-          value={('000' + gardenCount).slice(-4)}
-        />
-      </div>
-      <div className='flex justify-left items-center gap-4 py-5'>
-    
-      <TopPlants
-          icon={<TbPlant2 className='mr-2' />}
-          title={'Top Plants'}
-          months={months}
-          defaultMonth={defaultMonth}
-          plantLists={plantLists}
-        />
-          
+          {/* InfoCard 2 */}
+          <InfoCard
+            icon={<TbPlant2 className='mr-2' />}
+            route={'/garden'}
+            title={'User Gardens'}
+            value={('000' + plantCount).slice(-4)}
+          />
         </div>
+
+        {/* Right Side */}
+        <div className='flex flex-col justify-center items-center gap-2 mr-12'>
+          {/* Container for TopPlants */}
+          <div style={{ maxHeight: '60rem' }}>
+            <TopPlants
+              icon={<TbPlant2 className='mr-2' />}
+              title={'Top Plants'}
+              months={months}
+              defaultMonth={defaultMonth}
+              plantLists={plantLists}
+            />
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps() {
